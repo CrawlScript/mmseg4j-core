@@ -56,7 +56,8 @@ public class Chunk {
 		}
 		return avgLen;
 	}
-	
+
+	private double varianceScale = 10000000;
 	/** Variance of Word Lengths 就是 标准差的平方 */
 	public double getVariance() {
 		if(variance < 0) {
@@ -66,6 +67,9 @@ public class Chunk {
 					sum += Math.pow(word.getLength()-getAvgLen(), 2);
 				}
 			}
+			// 无理数可能会损失精度，通过下面方法只保留小数点后N位，过滤损失的精度
+			sum = Math.round(sum * varianceScale) / varianceScale;
+
 			variance = sum/getCount();
 		}
 		return variance;

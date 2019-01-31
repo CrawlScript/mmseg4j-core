@@ -99,6 +99,13 @@ public class ComplexSegTest {
 		Assert.assertEquals("广东工业大学", words);
 	}
 
+	// 测试方差精度丢失问题
+	@Test
+	public void testEffect13() throws IOException {
+		String words = segW.segWords("今天天气很不错", "|");
+		Assert.assertEquals("今天天气|很|不错", words);
+	}
+
 	@Test
 	public void testUnitEffect() throws IOException {
 		String words = segW.segWords("2008年底发了资金吗", "|");
